@@ -7,8 +7,12 @@ import numpy as np
 import os
 
 class CameraPub(Node):
-    def __init__(self, device="/dev/video2"):
+    def __init__(self):
         super().__init__('camera_publisher')
+        # パラメータ宣言（デフォルト値は/dev/video2）
+        self.declare_parameter('device', '/dev/video2')
+        device = self.get_parameter('device').get_parameter_value().string_value
+        
         self.publisher = self.create_publisher(Image, 'image_raw', 10)
         self.bridge = CvBridge()
         self.device = device
