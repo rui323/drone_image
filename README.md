@@ -29,6 +29,33 @@ ffplay /dev/video<番号> # 上記の場合　<番号>は5または7
 # 流れている場合　新しくウィンドウが開き、映像が流れているのを確認できる
 ~~~
  - 表示までに時間がかかるため　両方エラーが出た場合、根気強く実行を繰り返す
+ - これから使うデバイスがどれくらいの速度(fps)で送信できるか確認する
+~~~bash!
+v4l2-ctl --device=/dev/video2 --list-formats-ext
+# [0]: 'YUYV' (YUYV 4:2:2)
+#                Size: Discrete 800x600
+#                        Interval: Discrete 0.033s (30.000 fps)
+#                        Interval: Discrete 0.033s (29.970 fps)
+#                        Interval: Discrete 0.040s (25.000 fps)
+#                        Interval: Discrete 0.042s (24.000 fps)
+#                        Interval: Discrete 0.042s (23.970 fps)
+#                        Interval: Discrete 0.050s (20.000 fps)
+#                        Interval: Discrete 0.067s (15.000 fps)
+#                        Interval: Discrete 0.083s (12.000 fps)
+#                        Interval: Discrete 0.100s (10.000 fps)
+#                        Interval: Discrete 0.125s (8.000 fps)
+#                        Interval: Discrete 0.200s (5.000 fps)
+#                Size: Discrete 1024x768
+#                        Interval: Discrete 0.040s (25.000 fps)
+#                        Interval: Discrete 0.042s (24.000 fps)
+#                        Interval: Discrete 0.042s (23.970 fps)
+#                        Interval: Discrete 0.050s (20.000 fps)
+#                        Interval: Discrete 0.067s (15.000 fps)
+#                        Interval: Discrete 0.083s (12.000 fps)
+#                        Interval: Discrete 0.100s (10.000 fps)
+#                        Interval: Discrete 0.125s (8.000 fps)
+#                        Interval: Discrete 0.200s (5.000 fps)
+~~~
 ## 実行コード 
  - 映像が流れているデバイスの確認ができた場合、以下のコードを実行しros2のメッセージとして送信を行う
 ~~~bash!
